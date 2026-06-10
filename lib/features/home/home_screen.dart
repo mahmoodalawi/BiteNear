@@ -20,7 +20,7 @@ class HomeScreen extends ConsumerWidget {
   void _openSearch(BuildContext context, String query) {
     context.pushNamed(
       AppRoute.search.name,
-      queryParameters: query.isEmpty ? null : {'q': query},
+      queryParameters: query.isEmpty ? const {} : {'q': query},
     );
   }
 
@@ -49,7 +49,7 @@ class HomeScreen extends ConsumerWidget {
                           Text('Hungry, ${user?.displayName ?? 'there'}? 👋',
                               style: AppTextStyles.bodyMuted),
                           const SizedBox(height: 2),
-                          Text("What are you craving?",
+                          Text('What are you craving?',
                               style: AppTextStyles.headline),
                         ],
                       ),

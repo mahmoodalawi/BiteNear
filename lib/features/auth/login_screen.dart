@@ -115,7 +115,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("New to ${AppConstants.appName}? ",
+              Text('New to ${AppConstants.appName}? ',
                   style: AppTextStyles.bodyMuted),
               GestureDetector(
                 onTap: () => context.goNamed(AppRoute.signup.name),

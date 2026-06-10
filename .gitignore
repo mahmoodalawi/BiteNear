@@ -26,18 +26,14 @@ GoogleService-Info.plist
 lib/firebase_options.dart
 .env
 
-# Android
-android/.gradle/
-android/local.properties
-android/key.properties
-*.keystore
-*.jks
-
-# iOS
-ios/Pods/
-ios/.symlinks/
-ios/Flutter/Flutter.framework
-ios/Flutter/Flutter.podspec
+# Generated platform folders (regenerate with `flutter create .`)
+.metadata
+/android/
+/ios/
+/linux/
+/macos/
+/web/
+/windows/
 
 # Coverage
 coverage/

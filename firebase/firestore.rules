@@ -1,0 +1,45 @@
+rules_version = '2';
+
+// BiteNear Firestore security rules.
+// Reads are public (the catalog is meant to be discoverable); writes are
+// authenticated and ownership-scoped.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // User profiles — a user may only read/write their own document.
+    match /users/{uid} {
+      allow read: if isSignedIn() && request.auth.uid == uid;
+      allow write: if isSignedIn() && request.auth.uid == uid;
+    }
+
+    // Restaurants — public read; only the owner may modify.
+    match /restaurants/{restaurantId} {
+      allow read: if true;
+      allow create: if isSignedIn();
+      allow update, delete: if isSignedIn()
+        && resource.data.ownerId == request.auth.uid;
+    }
+
+    // Dishes — public read; only the owning restaurant may write.
+    match /dishes/{dishId} {
+      allow read: if true;
+      allow create: if isSignedIn();
+      allow update, delete: if isSignedIn()
+        && resource.data.ownerId == request.auth.uid;
+    }
+
+    // Reviews — public read; any signed-in user may create their own,
+    // and edit/delete only their own.
+    match /reviews/{reviewId} {
+      allow read: if true;
+      allow create: if isSignedIn()
+        && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if isSignedIn()
+        && resource.data.userId == request.auth.uid;
+    }
+  }
+}

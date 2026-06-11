@@ -74,7 +74,10 @@ flutter create .
 # 2. Install dependencies
 flutter pub get
 
-# 3. Run — defaults to the in-memory mock backend
+# 3. Apply the BiteNear app icon to all platforms
+dart run flutter_launcher_icons
+
+# 4. Run — defaults to the in-memory mock backend
 flutter run
 ```
 
